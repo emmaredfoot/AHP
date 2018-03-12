@@ -7,7 +7,6 @@ import sympy
 #6-7 correspond to very strongly more important
 #8-9 correspond to absolutely more important
 
-
 Equal = (1.0,1.0,1.0,1.0)
 EqI = (.5,1.0,1.0,1.5)
 InvEqI=(2/3,1,1,2)
@@ -36,23 +35,42 @@ CharLine1=[Equal, Equal,Very,Abs,Abs, Abs]
 CharLine2=[InvVery, InvAbs, Equal, Equal, Abs, Very]
 CharLine3=[InvAbs, InvAbs, InvAbs, InvVery, Equal, Equal]
 
-def GeometricMean(LineList, LineNumber):
-    values = [x[LineNumber] for x in LineList]
+def GeometricMean(LineList, Spot):
+    values = [x[Spot] for x in LineList]
     GeoMean=1
     for i in range(len(LineList)):
         GeoMean=GeoMean*values[i]
     return(GeoMean**(1/len(LineList)))
 
-Safety1Mean = GeometricMean(SafetyLine1, 0) + GeometricMean(SafetyLine2, 0)+GeometricMean(SafetyLine3, 0)
-Safety2Mean = GeometricMean(SafetyLine1, 1) + GeometricMean(SafetyLine2, 1)+GeometricMean(SafetyLine3, 1)
-Safety3Mean = GeometricMean(SafetyLine1, 2) + GeometricMean(SafetyLine2, 2)+GeometricMean(SafetyLine3, 2)
-Safety4Mean = GeometricMean(SafetyLine1, 3) + GeometricMean(SafetyLine2, 3)+GeometricMean(SafetyLine3, 3)
+a= [GeometricMean(SafetyLine1, 0), GeometricMean(SafetyLine2, 0), GeometricMean(SafetyLine3, 0)]
+b= [GeometricMean(SafetyLine1, 1), GeometricMean(SafetyLine2, 1),GeometricMean(SafetyLine3, 1)]
+c = [GeometricMean(SafetyLine1, 2), GeometricMean(SafetyLine2, 2),GeometricMean(SafetyLine3, 2)]
+d = [GeometricMean(SafetyLine1, 3), GeometricMean(SafetyLine2, 3),GeometricMean(SafetyLine3, 3)]
 
-def PerformanceScores(LineList, LineNumber, MeanSum):
-    r=GeometricMean(LineList, LineNumber)/MeanSum
-    return(r)
+PerformanceScore_11 = [a[0]/sum(d), b[0]/sum(c), c[0]/sum(b), d[0]/sum(a)]
+PerformanceScore_12 = [a[1]/sum(d), b[1]/sum(c), c[1]/sum(b), d[1]/sum(a)]
+PerformanceScore_13 = [a[1]/sum(d), b[1]/sum(c), c[1]/sum(b), d[1]/sum(a)]
 
-R11=PerformanceScores(SafetyLine1,0, Safety4Mean)
+def PerformanceScores(a, b, c, d):
+    # The number of rows in each matrix will always be three, so I am hard coding it in
+    PS=[0]*3
+    for x in range(3):
+        PS[x]=[a[x]/sum(d), b[x]/sum(c), c[x]/sum(b), d[x]/sum(a)]
+    return(PS)
+
+print(PerformanceScores(a, b, c, d))
+
+# def PerformanceScores(LineList, MeanSum):
+#     R=[0]*len(LineList)
+#     for i in range(len(Equal)):
+#         print("i= ", i)
+#         R[i]=GeometricMean(LineList, i)
+#         print(R[i])
+#
+#     # r=GeometricMean(LineList, Spot)/MeanSum
+#     # return(r)
+#
+# R11=PerformanceScores(SafetyLine1, Safety4Mean)
 
 
 # Safety1Mean = GeometricMean(SafetyLine1, 0) + GeometricMean(SafetyLine2, 0)+GeometricMean(SafetyLine3, 0)
@@ -60,10 +78,16 @@ R11=PerformanceScores(SafetyLine1,0, Safety4Mean)
 # Safety3Mean = GeometricMean(SafetyLine1, 2) + GeometricMean(SafetyLine2, 2)+GeometricMean(SafetyLine3, 2)
 # Safety4Mean = GeometricMean(SafetyLine1, 3) + GeometricMean(SafetyLine2, 3)+GeometricMean(SafetyLine3, 3)
 
+# Safety1Mean = GeometricMean(SafetyLine1, 0) + GeometricMean(SafetyLine2, 0)+GeometricMean(SafetyLine3, 0)
+# print(Safety1Mean)
+# Safety2Mean = GeometricMean(SafetyLine1, 1) + GeometricMean(SafetyLine2, 1)+GeometricMean(SafetyLine3, 1)
+# Safety3Mean = GeometricMean(SafetyLine1, 2) + GeometricMean(SafetyLine2, 2)+GeometricMean(SafetyLine3, 2)
+# Safety4Mean = GeometricMean(SafetyLine1, 3) + GeometricMean(SafetyLine2, 3)+GeometricMean(SafetyLine3, 3)
+
 
 #SafetyPS_11 = (GeometricMean(SafetyLine1,0)/Safety1Mean)
 
-Fluctuate1Mean = GeometricMean(FluctuateLine1, 0) + GeometricMean(FluctuateLine2, 0)+GeometricMean(FluctuateLine3, 0)
-Fluctuate2Mean = GeometricMean(FluctuateLine1, 1) + GeometricMean(FluctuateLine2, 1)+GeometricMean(FluctuateLine3, 1)
-Fluctuate3Mean = GeometricMean(FluctuateLine1, 2) + GeometricMean(FluctuateLine2, 2)+GeometricMean(FluctuateLine3, 2)
-Fluctuate4Mean = GeometricMean(FluctuateLine1, 3) + GeometricMean(FluctuateLine2, 3)+GeometricMean(FluctuateLine3, 3)
+# Fluctuate1Mean = GeometricMean(FluctuateLine1, 0) + GeometricMean(FluctuateLine2, 0)+GeometricMean(FluctuateLine3, 0)
+# Fluctuate2Mean = GeometricMean(FluctuateLine1, 1) + GeometricMean(FluctuateLine2, 1)+GeometricMean(FluctuateLine3, 1)
+# Fluctuate3Mean = GeometricMean(FluctuateLine1, 2) + GeometricMean(FluctuateLine2, 2)+GeometricMean(FluctuateLine3, 2)
+# Fluctuate4Mean = GeometricMean(FluctuateLine1, 3) + GeometricMean(FluctuateLine2, 3)+GeometricMean(FluctuateLine3, 3)

@@ -10,7 +10,7 @@ import sympy
 
 Equal = (1.0,1.0,1.0)
 EqI = (.5,1.0,1.5)
-InvEqI=(2.0/3.0,1.0,2.0)
+InvEqI=(2/3,1.0,2.0)
 Weak = (1,1.5,2)
 InvWeak=(1/2,2/3,1)
 Strong = (1.5,2,5/2)

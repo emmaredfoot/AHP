@@ -35,21 +35,21 @@ InvVery=(1/7,1/6,1/6,1/5)
 Abs=(7,8,8,9)
 InvAbs=(1/9,1/8,1/8,1/7)
 
-SafetyLine1=[Equal, Equal, Equal, Weak,Strong, EqI, Strong, Strong, EqI]
-SafetyLine2=[InvWeak, InvStrong, InvEqI, Equal, Equal, Equal, EqI, EqI,EqI]
-SafetyLine3=[InvStrong, InvStrong, InvEqI, InvEqI, InvEqI, InvEqI, Equal, Equal, Equal]
+SafetyLine1=[Equal, Equal, Equal, Equal, Weak,Strong, EqI, Strong, Strong, Strong, EqI, Strong]
+SafetyLine2=[InvWeak, InvStrong, InvEqI, InvStrong, Equal, Equal, Equal, Equal, EqI, EqI,EqI, EqI]
+SafetyLine3=[InvStrong, InvStrong, InvEqI, InvStrong, InvEqI, InvEqI, InvEqI, InvEqI, Equal, Equal, Equal, Equal]
 
-FluctuateLine1 = [Equal, Equal, Equal, EqI, EqI, EqI, Strong, Abs, EqI]
-FluctuateLine2= [InvEqI, InvEqI, InvEqI, Equal, Equal, Equal, Abs, Abs, EqI]
-FluctuateLine3= [InvStrong, InvAbs, InvEqI, InvAbs, InvAbs, InvEqI, Equal, Equal, Equal]
+FluctuateLine1 = [Equal, Equal, Equal, Equal, EqI, EqI, EqI, Abs, Strong, Abs, EqI, Strong]
+FluctuateLine2= [InvEqI, InvEqI, InvEqI, InvAbs, Equal, Equal, Equal, Equal, Abs, Abs, EqI, InvWeak]
+FluctuateLine3= [InvStrong, InvAbs, InvEqI, InvStrong, InvAbs, InvAbs, InvEqI, Weak, Equal, Equal, Equal, Equal]
 
-ProfitabilityLine1 = [Equal, Equal, Equal, InvVery, EqI, Very, EqI, InvVery, InvAbs]
-ProfitabilityLine2 = [Very, InvEqI, InvVery, Equal, Equal, Equal, EqI, EqI, InvAbs]
-ProfitabilityLine3 = [InvEqI, Very, Abs, InvEqI, InvEqI, Abs, Equal, Equal, Equal]
+ProfitabilityLine1 = [Equal, Equal, Equal, Equal, InvVery, EqI, Very, InvStrong, EqI, InvVery, InvAbs, InvStrong]
+ProfitabilityLine2 = [Very, InvEqI, InvVery, Strong, Equal, Equal, Equal, Equal, EqI, EqI, InvAbs, EqI]
+ProfitabilityLine3 = [InvEqI, Very, Abs, Strong, InvEqI, InvEqI, Abs, InvEqI, Equal, Equal, Equal, Equal]
 
-CharLine1=[Equal, Equal, Equal, Very, Abs, Abs, Abs, Abs, Abs]
-CharLine2=[InvVery, InvAbs, InvAbs, Equal, Equal, Equal, Abs, Very, EqI]
-CharLine3=[InvAbs, InvAbs, InvAbs, InvAbs, InvVery, InvEqI, Equal, Equal, Equal]
+CharLine1=[Equal, Equal, Equal, Equal, Very, Abs, Abs, Very, Abs, Abs, Abs, EqI]
+CharLine2=[InvVery, InvAbs, InvAbs, InvVery, Equal, Equal, Equal, Equal, InvAbs, InvVery, EqI, InvAbs]
+CharLine3=[InvAbs, InvAbs, InvAbs, InvEqI, Abs, Very, InvEqI, Abs,  Equal, Equal, Equal, Equal]
 
 #Find the Geometric Mean for Each of the matrices and each location
 SafeSpot0 = [GeometricMean(SafetyLine1, 0), GeometricMean(SafetyLine2, 0), GeometricMean(SafetyLine3, 0)]

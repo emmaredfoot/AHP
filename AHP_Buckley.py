@@ -24,13 +24,12 @@ def WeightPS(r_ij, weight_i):
     weightedPS=[0]*len(r_ij)
     for i in range(len(r_ij)):
         weightedPS[i]=[a*b for a,b in zip(r_ij[i],weight_i[i])]
-    A=weightedPS[0]
-    B=weightedPS[1]
-    C=weightedPS[2]
-    utility=[0]*len(C)
-    for x in range(len(C)):
-        utility[x] = A[x]+B[x]+C[x]
-    return(utility)
+    Desal=weightedPS[0]
+    HProd=weightedPS[1]
+    SynFuel=weightedPS[2]
+    return(Desal, HProd, SynFuel)
+
+
 
 
 #CONSTANTS AND INPUT
@@ -97,15 +96,20 @@ Weights = PerformanceScores(CharSpot0, CharSpot1, CharSpot2, CharSpot3)
 
 
 
-#I am passing in the performance scores and returning the summed up utility values
-SafetyUtility = WeightPS(SafetyPS, Weights)
-FlucUtility = WeightPS(FlucPS, Weights)
-ProfitUtility = WeightPS(ProfitPS, Weights)
+#I am passing in the performance scores and returning the weighted performance scores for each of the options
+DesalSafe, HProdSafe, SynFuelSafe = WeightPS(SafetyPS, Weights)
+DesalFluc, HProdFluc, SynFuelFluc = WeightPS(FlucPS, Weights)
+DesalProf, HProdProf, SynFuelProf = WeightPS(ProfitPS, Weights)
 
-def Membership(utility):
-    if x < utility[0] or x > utility[len(utility)]:
-        M = 0
+def Utility(A, B, C):
+    utility=[0]*len(C)
+    for x in range(len(C)):
+        utility[x] = A[x]+B[x]+C[x]
+    return(utility)
 
+DesalU=Utility(DesalSafe, DesalFluc, DesalProf)
+HProdU= Utility(HProdSafe, HProdFluc, HProdProf)
+SynFuelU=Utility(SynFuelSafe, SynFuelFluc, SynFuelProf)
 
 #Save the PerformanceScores to a file
 with open('PerformanceScores.csv', 'w') as myfile:
@@ -130,11 +134,25 @@ myfile.close()
 
 with open('Utility.csv', 'w') as ufile:
     output = csv.writer(ufile)
-    output.writerow('Safety')
-    output.writerow(SafetyUtility)
-    output.writerow("Fluctuate")
-    output.writerow(FlucUtility)
-    output.writerow("Profitability")
-    output.writerow(ProfitUtility)
+    output.writerow('Desalination')
+    output.writerow(Utility(DesalSafe, DesalFluc, DesalProf))
+    output.writerow("Hydrogen")
+    output.writerow(Utility(HProdSafe, HProdFluc, HProdProf))
+    output.writerow("Synthetic Fuels")
+    output.writerow(Utility(SynFuelSafe, SynFuelFluc, SynFuelProf))
 
 ufile.close()
+
+#Graph Member Functions
+
+x=list(numpy.arange(0,2,0.01))
+alpha=[0]*len(x)
+for i in range(len(x)):
+    if x[i]<DesalU[0] or x[i]>DesalU[3]:
+        alpha[i]=0
+        print('alpha 0')
+    else:
+        alpha[i]=1
+        print('alpha 1')
+plt.plot(x,alpha)
+plt.show

@@ -1,5 +1,6 @@
 import numpy
 import csv
+import matplotlib.pyplot as plt
 
 #Functions
 def GeometricMean(LineList, Spot):
@@ -40,32 +41,32 @@ def WeightPS(r_ij, weight_i):
 #8-9 correspond to absolutely more important
 
 Equal = (1.0,1.0,1.0,1.0)
-EqI = (1/2,1.0,1.0,3/2)
-InvEqI=(2/3,1,1,2)
+EqI = (1/2,3/4,5/4,3/2)
+InvEqI=(2/3,4/5,4/3,2)
 Weak = (1,2,2,3)
 InvWeak=(1/3,1/2,1/2,1)
 Strong = (2,3,3,4)
 InvStrong=(1/4,1/3,1/3,1/2)
 Very = (5,6,6,7)
 InvVery=(1/7,1/6,1/6,1/5)
-Abs=(7,8,8,9)
-InvAbs=(1/9,1/8,1/8,1/7)
+Abs=(7,7.5,8.5,9)
+InvAbs=(1/9,1/8.5,1/7.5,1/7)
 
-SafetyLine1=[Equal, Equal, Equal, Equal, Weak,Strong, EqI, Strong, Strong, Strong, EqI, Strong]
-SafetyLine2=[InvWeak, InvStrong, InvEqI, InvStrong, Equal, Equal, Equal, Equal, EqI, EqI,EqI, EqI]
-SafetyLine3=[InvStrong, InvStrong, InvEqI, InvStrong, InvEqI, InvEqI, InvEqI, InvEqI, Equal, Equal, Equal, Equal]
+SafetyLine1=[Equal, Equal, Equal, Equal, Equal, Weak,Strong, EqI, Strong, Very, Strong, Strong, EqI, Strong, Strong]
+SafetyLine2=[InvWeak, InvStrong, InvEqI, InvStrong, InvVery, Equal, Equal, Equal, Equal, Equal, EqI, EqI,EqI, EqI, InvWeak]
+SafetyLine3=[InvStrong, InvStrong, InvEqI, InvStrong, InvStrong, InvEqI, InvEqI, InvEqI, InvEqI, Weak, Equal, Equal, Equal, Equal, Equal]
 
-FluctuateLine1 = [Equal, Equal, Equal, Equal, EqI, EqI, EqI, Abs, Strong, Abs, EqI, Strong]
-FluctuateLine2= [InvEqI, InvEqI, InvEqI, InvAbs, Equal, Equal, Equal, Equal, Abs, Abs, EqI, InvWeak]
-FluctuateLine3= [InvStrong, InvAbs, InvEqI, InvStrong, InvAbs, InvAbs, InvEqI, Weak, Equal, Equal, Equal, Equal]
+FluctuateLine1 = [Equal, Equal, Equal, Equal, Equal, EqI, EqI, EqI, Abs, Very, Strong, Abs, EqI, Strong, Strong]
+FluctuateLine2= [InvEqI, InvEqI, InvEqI, InvAbs, InvVery, Equal, Equal, Equal, Equal, Equal, Abs, Abs, EqI, InvWeak, EqI]
+FluctuateLine3= [InvStrong, InvAbs, InvEqI, InvStrong, InvStrong, InvAbs, InvAbs, InvEqI, Weak, Equal, Equal, Equal, Equal, Equal]
 
-ProfitabilityLine1 = [Equal, Equal, Equal, Equal, InvVery, EqI, Very, InvStrong, EqI, InvVery, InvAbs, InvStrong]
-ProfitabilityLine2 = [Very, InvEqI, InvVery, Strong, Equal, Equal, Equal, Equal, EqI, EqI, InvAbs, EqI]
-ProfitabilityLine3 = [InvEqI, Very, Abs, Strong, InvEqI, InvEqI, Abs, InvEqI, Equal, Equal, Equal, Equal]
+ProfitabilityLine1 = [Equal, Equal, Equal, Equal, Equal, InvVery, EqI, Very, InvStrong, InvVery, EqI, InvVery, InvAbs, InvStrong, InvWeak]
+ProfitabilityLine2 = [Very, InvEqI, InvVery, Strong, Very, Equal, Equal, Equal, Equal, Equal, EqI, EqI, InvAbs, EqI, Strong]
+ProfitabilityLine3 = [InvEqI, Very, Abs, Strong, Weak, InvEqI, InvEqI, Abs, InvEqI, InvStrong, Equal, Equal, Equal, Equal, Equal]
 
-CharLine1=[Equal, Equal, Equal, Equal, Very, Abs, Abs, Very, Abs, Abs, Abs, EqI]
-CharLine2=[InvVery, InvAbs, InvAbs, InvVery, Equal, Equal, Equal, Equal, InvAbs, InvVery, EqI, InvAbs]
-CharLine3=[InvAbs, InvAbs, InvAbs, InvEqI, Abs, Very, InvEqI, Abs,  Equal, Equal, Equal, Equal]
+CharLine1=[Equal, Equal, Equal, Equal, Equal, Very, Abs, Abs, Very, Very, Abs, Abs, Abs, EqI, Very]
+CharLine2=[InvVery, InvAbs, InvAbs, InvVery, InvVery, Equal, Equal, Equal, Equal, Equal, InvAbs, InvVery, EqI, InvAbs]
+CharLine3=[InvAbs, InvAbs, InvAbs, InvEqI, InvVery, Abs, Very, InvEqI, Abs, Strong, Equal, Equal, Equal, Equal, Equal]
 
 #Find the Geometric Mean for Each of the matrices and each location
 SafeSpot0 = [GeometricMean(SafetyLine1, 0), GeometricMean(SafetyLine2, 0), GeometricMean(SafetyLine3, 0)]
@@ -100,6 +101,11 @@ Weights = PerformanceScores(CharSpot0, CharSpot1, CharSpot2, CharSpot3)
 SafetyUtility = WeightPS(SafetyPS, Weights)
 FlucUtility = WeightPS(FlucPS, Weights)
 ProfitUtility = WeightPS(ProfitPS, Weights)
+
+def Membership(utility):
+    if x < utility[0] or x > utility[len(utility)]:
+        M = 0
+
 
 #Save the PerformanceScores to a file
 with open('PerformanceScores.csv', 'w') as myfile:

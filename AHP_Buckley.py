@@ -1,4 +1,5 @@
 import numpy
+import csv
 
 #Functions
 def GeometricMean(LineList, Spot):
@@ -14,6 +15,21 @@ def PerformanceScores(a, b, c, d):
     for x in range(3):
         PS[x]=[a[x]/sum(d), b[x]/sum(c), c[x]/sum(b), d[x]/sum(a)]
     return(PS)
+
+#Weight all of the performance score values
+#Add all of the values in the individual locations together
+#Return the utility function for safety, ability to fluctuate, and profitability
+def WeightPS(r_ij, weight_i):
+    weightedPS=[0]*len(r_ij)
+    for i in range(len(r_ij)):
+        weightedPS[i]=[a*b for a,b in zip(r_ij[i],weight_i[i])]
+    A=weightedPS[0]
+    B=weightedPS[1]
+    C=weightedPS[2]
+    utility=[0]*len(C)
+    for x in range(len(C)):
+        utility[x] = A[x]+B[x]+C[x]
+    return(utility)
 
 
 #CONSTANTS AND INPUT
@@ -72,9 +88,47 @@ CharSpot1  = [GeometricMean(CharLine1, 1), GeometricMean(CharLine2, 1), Geometri
 CharSpot2  = [GeometricMean(CharLine1, 2), GeometricMean(CharLine2, 2), GeometricMean(CharLine3, 2)]
 CharSpot3  = [GeometricMean(CharLine1, 3), GeometricMean(CharLine2, 3), GeometricMean(CharLine3, 3)]
 
+#Save the Performance Score values
+SafetyPS = PerformanceScores(SafeSpot0, SafeSpot1, SafeSpot2, SafeSpot3)
+FlucPS = PerformanceScores(FlucSpot0, FlucSpot1, FlucSpot2, FlucSpot3)
+ProfitPS = PerformanceScores(ProfitSpot0, ProfitSpot1, ProfitSpot2, ProfitSpot3)
+Weights = PerformanceScores(CharSpot0, CharSpot1, CharSpot2, CharSpot3)
 
-print("The Performance Scores indicate the relative strength of each pair of elements in the same hierarchy \n")
-print("Safety Performance Scores: ", PerformanceScores(SafeSpot0, SafeSpot1, SafeSpot2, SafeSpot3))
-print("\nFluctuation Performance Scores: ", PerformanceScores(FlucSpot0, FlucSpot1, FlucSpot2, FlucSpot3))
-print("\nProfitability Performance Scores: ", PerformanceScores(ProfitSpot0, ProfitSpot1, ProfitSpot2, ProfitSpot3))
-print("\n The Fuzzy Weights are: ", PerformanceScores(CharSpot0, CharSpot1, CharSpot2, CharSpot3))
+
+
+#I am passing in the performance scores and returning the summed up utility values
+SafetyUtility = WeightPS(SafetyPS, Weights)
+FlucUtility = WeightPS(FlucPS, Weights)
+ProfitUtility = WeightPS(ProfitPS, Weights)
+
+#Save the PerformanceScores to a file
+with open('PerformanceScores.csv', 'w') as myfile:
+    out=csv.writer(myfile)
+    out.writerow('Safety')
+    out.writerow(SafetyPS[0])
+    out.writerow(SafetyPS[1])
+    out.writerow(SafetyPS[2])
+    out.writerow('\nFluctuate')
+    out.writerow(FlucPS[0])
+    out.writerow(FlucPS[1])
+    out.writerow(FlucPS[2])
+    out.writerow('\nProfitability')
+    out.writerow(ProfitPS[0])
+    out.writerow(ProfitPS[1])
+    out.writerow(ProfitPS[2])
+    out.writerow('\nFuzzy Weights')
+    out.writerow(Weights[0])
+    out.writerow(Weights[1])
+    out.writerow(Weights[2])
+myfile.close()
+
+with open('Utility.csv', 'w') as ufile:
+    output = csv.writer(ufile)
+    output.writerow('Safety')
+    output.writerow(SafetyUtility)
+    output.writerow("Fluctuate")
+    output.writerow(FlucUtility)
+    output.writerow("Profitability")
+    output.writerow(ProfitUtility)
+
+ufile.close()

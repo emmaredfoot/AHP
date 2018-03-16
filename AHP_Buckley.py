@@ -24,10 +24,23 @@ def WeightPS(r_ij, weight_i):
     weightedPS=[0]*len(r_ij)
     for i in range(len(r_ij)):
         weightedPS[i]=[a*b for a,b in zip(r_ij[i],weight_i[i])]
+        print(i,r_ij[i])
+        #L_1[i]=r_ij[i]
     Desal=weightedPS[0]
     HProd=weightedPS[1]
     SynFuel=weightedPS[2]
+    # L_1=(r_ij[1]-PerfScore[0])/(Weight[1]-Weight[0])
+    # R_1=(PerfScore[3]-PerfScore[2])/(Weight[3]-Weight[2])
+    # L_2=Weight[0]*(PerfScore[1]-PerfScore[0])+PerfScore[0]*(Weight[1]-Weight[1])
+    # R_2=-1*(Weight[3]*(PerfScore[3]-PerfScore[2])+PerfScore[0]*(Weight[3]-Weight[2]))
+    # return(L_1, L_2, R_1, R_2)
     return(Desal, HProd, SynFuel)
+
+def Utility(A, B, C):
+    utility=[0]*len(C)
+    for x in range(len(C)):
+        utility[x] = A[x]+B[x]+C[x]
+    return(utility)
 
 
 
@@ -42,14 +55,14 @@ def WeightPS(r_ij, weight_i):
 Equal = (1.0,1.0,1.0,1.0)
 EqI = (1/2,3/4,5/4,3/2)
 InvEqI=(2/3,4/5,4/3,2)
-Weak = (1,2,2,3)
-InvWeak=(1/3,1/2,1/2,1)
-Strong = (2,3,3,4)
-InvStrong=(1/4,1/3,1/3,1/2)
-Very = (5,6,6,7)
-InvVery=(1/7,1/6,1/6,1/5)
-Abs=(7,7.5,8.5,9)
-InvAbs=(1/9,1/8.5,1/7.5,1/7)
+Weak = (1,3/2,5/2,3)
+InvWeak=(1/3,2/5,2/3,1)
+Strong = (2,5/2,7/2,4)
+InvStrong=(1/4,2/7,2/5,1/2)
+Very = (5,11/2,13/2,7)
+InvVery=(1/7,2/11,2/13,1/5)
+Abs=(7,15/2,17/2,9)
+InvAbs=(1/9,2/17,2/15,1/7)
 
 SafetyLine1=[Equal, Equal, Equal, Equal, Equal, Weak,Strong, EqI, Strong, Very, Strong, Strong, EqI, Strong, Strong]
 SafetyLine2=[InvWeak, InvStrong, InvEqI, InvStrong, InvVery, Equal, Equal, Equal, Equal, Equal, EqI, EqI,EqI, EqI, InvWeak]
@@ -101,18 +114,23 @@ DesalSafe, HProdSafe, SynFuelSafe = WeightPS(SafetyPS, Weights)
 DesalFluc, HProdFluc, SynFuelFluc = WeightPS(FlucPS, Weights)
 DesalProf, HProdProf, SynFuelProf = WeightPS(ProfitPS, Weights)
 
-def Utility(A, B, C):
-    utility=[0]*len(C)
-    for x in range(len(C)):
-        utility[x] = A[x]+B[x]+C[x]
-    return(utility)
+#Return the limits of the fuzzy numbers
+#Finding the left and right points for the member Functions
+def memberlimits(PerfScore, Weight):
+    L_1=(PerfScore[1]-PerfScore[0])/(Weight[1]-Weight[0])
+    R_1=(PerfScore[3]-PerfScore[2])/(Weight[3]-Weight[2])
+    L_2=Weight[0]*(PerfScore[1]-PerfScore[0])+PerfScore[0]*(Weight[1]-Weight[1])
+    R_2=-1*(Weight[3]*(PerfScore[3]-PerfScore[2])+PerfScore[0]*(Weight[3]-Weight[2]))
+    return(L_1, L_2, R_1, R_2)
+
+#DesalL1, DesalL2, DesalR1, DesalR2 = memberlimits()
 
 DesalU=Utility(DesalSafe, DesalFluc, DesalProf)
 HProdU= Utility(HProdSafe, HProdFluc, HProdProf)
 SynFuelU=Utility(SynFuelSafe, SynFuelFluc, SynFuelProf)
 
 #Save the PerformanceScores to a file
-with open('PerformanceScores.csv', 'w') as myfile:
+with open('PerformanceScores_new.csv', 'w') as myfile:
     out=csv.writer(myfile)
     out.writerow('Safety')
     out.writerow(SafetyPS[0])
@@ -132,7 +150,7 @@ with open('PerformanceScores.csv', 'w') as myfile:
     out.writerow(Weights[2])
 myfile.close()
 
-with open('Utility.csv', 'w') as ufile:
+with open('Utility_2.csv', 'w') as ufile:
     output = csv.writer(ufile)
     output.writerow('Desalination')
     output.writerow(Utility(DesalSafe, DesalFluc, DesalProf))
@@ -143,16 +161,18 @@ with open('Utility.csv', 'w') as ufile:
 
 ufile.close()
 
-#Graph Member Functions
 
-x=list(numpy.arange(0,2,0.01))
-alpha=[0]*len(x)
-for i in range(len(x)):
-    if x[i]<DesalU[0] or x[i]>DesalU[3]:
-        alpha[i]=0
-        print('alpha 0')
-    else:
-        alpha[i]=1
-        print('alpha 1')
-plt.plot(x,alpha)
-plt.show
+
+
+
+
+#Graph Member Functions
+# x=list(numpy.arange(0,2,0.01))
+# alpha=[0]*len(x)
+# for i in range(len(x)):
+#     if x[i]<DesalU[0] or x[i]>DesalU[3]:
+#         alpha[i]=0
+#     else:
+#         alpha[i]=1
+# plt.plot(x,alpha)
+# plt.show()

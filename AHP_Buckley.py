@@ -20,20 +20,22 @@ def PerformanceScores(a, b, c, d):
 #Weight all of the performance score values
 #Add all of the values in the individual locations together
 #Return the utility function for safety, ability to fluctuate, and profitability
-def WeightPS(r_ij, weight_i):
+def WeightPS(r_ij, weight):
     weightedPS=[0]*len(r_ij)
     for i in range(len(r_ij)):
-        weightedPS[i]=[a*b for a,b in zip(r_ij[i],weight_i[i])]
+        weightedPS[i]=[a*b for a,b in zip(r_ij[i],weight[i])]
         print(i,r_ij[i])
         #L_1[i]=r_ij[i]
     Desal=weightedPS[0]
     HProd=weightedPS[1]
     SynFuel=weightedPS[2]
-    # L_1=(r_ij[1]-PerfScore[0])/(Weight[1]-Weight[0])
-    # R_1=(PerfScore[3]-PerfScore[2])/(Weight[3]-Weight[2])
-    # L_2=Weight[0]*(PerfScore[1]-PerfScore[0])+PerfScore[0]*(Weight[1]-Weight[1])
-    # R_2=-1*(Weight[3]*(PerfScore[3]-PerfScore[2])+PerfScore[0]*(Weight[3]-Weight[2]))
-    # return(L_1, L_2, R_1, R_2)
+    #Find the right and left sides of each of the lines
+    # for i in range(len(Desal)):
+    #     L_1=(Desal[1]-weight[0])/(weight[1]-weight[0])
+    #     R_1=(Desal[3]-Desal[2])/(Weight[3]-Weight[2])
+    #     L_2=Weight[0]*(Desal[1]-Desal[0])+Desal[0]*(Weight[1]-Weight[1])
+    #     R_2=-1*(Weight[3]*(Desal[3]-Desal[2])+Desal[0]*(Weight[3]-Weight[2]))
+    #     return(L_1, L_2, R_1, R_2)
     return(Desal, HProd, SynFuel)
 
 def Utility(A, B, C):
@@ -114,6 +116,8 @@ DesalSafe, HProdSafe, SynFuelSafe = WeightPS(SafetyPS, Weights)
 DesalFluc, HProdFluc, SynFuelFluc = WeightPS(FlucPS, Weights)
 DesalProf, HProdProf, SynFuelProf = WeightPS(ProfitPS, Weights)
 
+
+
 #Return the limits of the fuzzy numbers
 #Finding the left and right points for the member Functions
 def memberlimits(PerfScore, Weight):
@@ -122,6 +126,22 @@ def memberlimits(PerfScore, Weight):
     L_2=Weight[0]*(PerfScore[1]-PerfScore[0])+PerfScore[0]*(Weight[1]-Weight[1])
     R_2=-1*(Weight[3]*(PerfScore[3]-PerfScore[2])+PerfScore[0]*(Weight[3]-Weight[2]))
     return(L_1, L_2, R_1, R_2)
+
+DSL1, DSL2, DSL3, DSL4=memberlimits(DesalSafe, Weights[0])
+DFL1, DFL2, DFL3, DFL4=memberlimits(DesalFluc, Weights[1])
+DPL1, DPL2, DPL3, DPL4=memberlimits(DesalFluc, Weights[2])
+HSL1, HSL2, HSL3, HSL4=memberlimits(HProdSafe, Weights[0])
+HFL1, HFL2, HFL3, HFL4=memberlimits(HProdFluc, Weights[1])
+HPL1, HPL2, HPL3, HPL4=memberlimits(HProdProf, Weights[2])
+SSL1, SSL2, SSL3, SSL4=memberlimits(SynFuelSafe, Weights[0])
+SFL1, SFL2, SFL3, DFL4=memberlimits(SynFuelFluc, Weights[1])
+DPL1, DPL2, DPL3, DPL4=memberlimits(SynFuelFluc, Weights[2])
+
+DesalL1 = DSL1+DFL1+DPL1
+DesalL2 = DSL2+DFL2+DPL2
+
+
+
 
 #DesalL1, DesalL2, DesalR1, DesalR2 = memberlimits()
 

@@ -139,9 +139,9 @@ DPL1, DPL2, DPL3, DPL4=memberlimits(SynFuelFluc, Weights[2])
 
 DesalL1 = DSL1+DFL1+DPL1
 DesalL2 = DSL2+DFL2+DPL2
-DesalR1 =
+#DesalR1 =
 
-def AddUp
+#def AddUp
 
 
 

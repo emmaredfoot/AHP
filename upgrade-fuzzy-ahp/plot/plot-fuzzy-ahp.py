@@ -127,7 +127,7 @@ fig,left_axis=plot.subplots()
 #
 # plot text
 #
-title='Performance scores'
+title='Utility set'
 xtitle='Fuzzy number $\chi$ [-]'
 ytitle='Membership function $\mu(\chi)$ [-]'
 #
@@ -157,9 +157,9 @@ legend_font=42
 # annotate
 # position of the annotation dependent on axis domain and range
 #
-annotate_title='Profitability'
-annotate_x=0.81
-annotate_y=0.95
+#annotate_title='Utility set'
+#annotate_x=0.71
+#annotate_y=0.95
 #
 #annotate_title2=''
 #annotate_x2=
@@ -256,7 +256,7 @@ left_axis.yaxis.set_minor_locator(MultipleLocator(yminortick))
 # annotation
 # comment out if not needed
 #
-left_axis.annotate(annotate_title,xy=(annotate_x,annotate_y),xytext=(annotate_x,annotate_y),fontsize=annotate_fontsize)
+#left_axis.annotate(annotate_title,xy=(annotate_x,annotate_y),xytext=(annotate_x,annotate_y),fontsize=annotate_fontsize)
 #left_axis.annotate(annotate_title2,xy=(annotate_x2,annotate_y2),xytext=(annotate_x2,annotate_y2),fontsize=annotate_fontsize)
 #left_axis.annotate(annotate_title3,xy=(annotate_x3,annotate_y3),xytext=(annotate_x3,annotate_y3),fontsize=annotate_fontsize)
 #

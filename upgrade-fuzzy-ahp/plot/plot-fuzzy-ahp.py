@@ -127,7 +127,7 @@ fig,left_axis=plot.subplots()
 #
 # plot text
 #
-title='Fuzzy weights'
+title='Performance scores'
 xtitle='Fuzzy number $\chi$ [-]'
 ytitle='Membership function $\mu(\chi)$ [-]'
 #
@@ -143,13 +143,13 @@ line_color2='red' #color
 #line_color3='green' #color
 #line_color4='cyan' #color
 #
-curve_text0='Safety'           #legend text
-curve_text1='Flexibility'      #legend text
-curve_text2='Profitability'    #legend text
-#curve_text3=''	               #legend text
-#curve_text4=''	               #legend text
+curve_text0='Desalination'                  #legend text
+curve_text1='Hydrogen production'           #legend text
+curve_text2='Synthetic fuels production'    #legend text
+#curve_text3=''	                            #legend text
+#curve_text4=''	                            #legend text
 #
-legend_location='upper center' #location of legend on grid
+legend_location='lower right' #location of legend on grid
 legend_font=42
 #
 ###
@@ -157,8 +157,8 @@ legend_font=42
 # annotate
 # position of the annotation dependent on axis domain and range
 #
-annotate_title='Criteria'
-annotate_x=0.87
+annotate_title='Profitability'
+annotate_x=0.81
 annotate_y=0.95
 #
 #annotate_title2=''

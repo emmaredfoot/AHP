@@ -176,11 +176,12 @@ absolute=(8,8.5,9,9)
 ####### AHP inverse mapping
 inverse_equal=(1.0,1.0,1.0,1.0)
 #
-# for i in range (0,trapezoid_membership):
+for i in range (0,trapezoid_membership):
 # see tuple math - reverse and then inverse
+#
 # (j,i) = 1/s,1/n,1/m,1/l
 ##################################################################################
-#
+##
 # FLAGS
 #
 print(crisp_number_data)

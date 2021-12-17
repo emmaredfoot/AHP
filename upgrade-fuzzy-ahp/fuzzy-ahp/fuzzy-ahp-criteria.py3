@@ -322,8 +322,14 @@ full_geometric_mean=numpy.zeros((crisp_number_row,fuzzy_membership))
 #
 #
 ####### weighted criteria 
-# geometric mean of the geometric means
 weighted_criteria=numpy.zeros((crisp_number_row,fuzzy_membership))
+#######
+#
+#
+#
+####### remapped (normalized) crisp numbers for the final weights
+remapped_crisp_numbers=numpy.zeros((crisp_number_row))
+nmz_remapped_crisp_numbers=numpy.zeros((crisp_number_row))
 #######
 #
 #
@@ -608,6 +614,40 @@ for l in range(0,fuzzy_membership):
 #
 ##################################################################################
 #
+# REMAP TO CRISP NUMBERS
+#
+# change based on membership functions
+#
+#
+#
+###
+i=0
+###
+#
+#
+#
+### remap uses trapezoid rule
+#
+for i in range(0,crisp_number_row):
+    remapped_crisp_numbers[i]=(weighted_criteria[i,0]+2*weighted_criteria[i,1]+2*weighted_criteria[i,2]+weighted_criteria[i,3])/(6)
+#
+remapped_sum=numpy.sum(remapped_crisp_numbers)
+###
+#
+#
+#
+###
+#
+for i in range(0,crisp_number_row):
+    nmz_remapped_crisp_numbers[i]=remapped_crisp_numbers[i]/remapped_sum
+#
+nmz_remapped_crisp_numbers=numpy.vstack(nmz_remapped_crisp_numbers)
+###
+#
+#
+#
+##################################################################################
+#
 # PREPARE FOR GRAPHING
 #
 #
@@ -643,6 +683,7 @@ weighted_criteria_graph=numpy.concatenate((membership_function_ordinate,weighted
 #
 numpy.savetxt('weighted-criteria.out',weighted_criteria,fmt='%.4f')
 numpy.savetxt('weighted-criteria-graph.out',weighted_criteria_graph,fmt='%.4f')
+numpy.savetxt('nmz-remapped-crisp-numbers.out',nmz_remapped_crisp_numbers,fmt='%.4f')
 #
 # FLAGS AND UNIT TESTS
 #
@@ -671,6 +712,7 @@ numpy.savetxt('weighted-criteria-graph.out',weighted_criteria_graph,fmt='%.4f')
 #print('geometric mean 5','\n',geometric_mean_criteria5,'\n')
 #print('full geometric mean','\n',full_geometric_mean,'\n')
 #print('weighted criteria','\n',weighted_criteria,'\n')
+#print('remapped crisp numbers',remapped_crisp_numbers,'\n')
 #
 #
 #

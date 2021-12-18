@@ -125,7 +125,7 @@ import sympy
 #
 #
 ####### inputs
-script,pairwise_input_criteria1,pairwise_input_criteria2,pairwise_input_criteria3,pairwise_input_criteria4,pairwise_input_criteria5=argv
+script,pairwise_input_alternative1,pairwise_input_alternative2,pairwise_input_alternative3,pairwise_input_alternative4,pairwise_input_alternative5=argv
 #######
 #
 #
@@ -134,11 +134,11 @@ script,pairwise_input_criteria1,pairwise_input_criteria2,pairwise_input_criteria
 #
 # number is the label for the expert
 # drawback that each have to be added through the code per expert
-crisp_number_data_criteria1=numpy.genfromtxt(pairwise_input_criteria1,dtype=float)
-crisp_number_data_criteria2=numpy.genfromtxt(pairwise_input_criteria2,dtype=float)
-crisp_number_data_criteria3=numpy.genfromtxt(pairwise_input_criteria3,dtype=float)
-crisp_number_data_criteria4=numpy.genfromtxt(pairwise_input_criteria4,dtype=float)
-crisp_number_data_criteria5=numpy.genfromtxt(pairwise_input_criteria5,dtype=float)
+crisp_number_data_alternative1=numpy.genfromtxt(pairwise_input_alternative1,dtype=float)
+crisp_number_data_alternative2=numpy.genfromtxt(pairwise_input_alternative2,dtype=float)
+crisp_number_data_alternative3=numpy.genfromtxt(pairwise_input_alternative3,dtype=float)
+crisp_number_data_alternative4=numpy.genfromtxt(pairwise_input_alternative4,dtype=float)
+crisp_number_data_alternative5=numpy.genfromtxt(pairwise_input_alternative5,dtype=float)
 #######
 #
 #
@@ -212,31 +212,31 @@ def FuzzyMap(crisp_number_data,l):
 #
 #
 ####### number of rows
-crisp_number_data_row_criteria1=crisp_number_data_criteria1.shape[0]
-crisp_number_data_column_criteria1=crisp_number_data_criteria1.shape[1]
+crisp_number_data_row_alternative1=crisp_number_data_alternative1.shape[0]
+crisp_number_data_column_alternative1=crisp_number_data_alternative1.shape[1]
 #
-crisp_number_data_row_criteria2=crisp_number_data_criteria2.shape[0]
-crisp_number_data_column_criteria2=crisp_number_data_criteria2.shape[1]
+crisp_number_data_row_alternative2=crisp_number_data_alternative2.shape[0]
+crisp_number_data_column_alternative2=crisp_number_data_alternative2.shape[1]
 #
-crisp_number_data_row_criteria3=crisp_number_data_criteria3.shape[0]
-crisp_number_data_column_criteria3=crisp_number_data_criteria3.shape[1]
+crisp_number_data_row_alternative3=crisp_number_data_alternative3.shape[0]
+crisp_number_data_column_alternative3=crisp_number_data_alternative3.shape[1]
 #
-crisp_number_data_row_criteria3=crisp_number_data_criteria3.shape[0]
-crisp_number_data_column_criteria3=crisp_number_data_criteria3.shape[1]
+crisp_number_data_row_alternative3=crisp_number_data_alternative3.shape[0]
+crisp_number_data_column_alternative3=crisp_number_data_alternative3.shape[1]
 #
-crisp_number_data_row_criteria4=crisp_number_data_criteria4.shape[0]
-crisp_number_data_column_criteria4=crisp_number_data_criteria4.shape[1]
+crisp_number_data_row_alternative4=crisp_number_data_alternative4.shape[0]
+crisp_number_data_column_alternative4=crisp_number_data_alternative4.shape[1]
 #
-crisp_number_data_row_criteria5=crisp_number_data_criteria5.shape[0]
-crisp_number_data_column_criteria5=crisp_number_data_criteria5.shape[1]
+crisp_number_data_row_alternative5=crisp_number_data_alternative5.shape[0]
+crisp_number_data_column_alternative5=crisp_number_data_alternative5.shape[1]
 #
 ###
 #
 # all pairwise matrices have to be n x n
 # doing it all out because unit test can be made to verify later
 #
-crisp_number_row=crisp_number_data_row_criteria1
-crisp_number_column=crisp_number_data_column_criteria1
+crisp_number_row=crisp_number_data_row_alternative1
+crisp_number_column=crisp_number_data_column_alternative1
 #######
 #
 #
@@ -292,24 +292,24 @@ inverse_absolute=numpy.zeros(fuzzy_membership)
 # not cumulative though
 # set 0,[0,1] is the same position as set 1,[0,1], the [0,1] does not need to be added through sets
 #
-# in the calculation spread sheet, matrix dimensions are row-criteria,column-(criteria)(membership)
+# in the calculation spread sheet, matrix dimensions are row-alternative,column-(alternative)(membership)
 # could get unwieldy for a lot of criteria/alternatives
 #
-fuzzy_crisp_number_data_criteria1=numpy.zeros((crisp_number_data_row_criteria1,crisp_number_data_row_criteria1,fuzzy_membership))
-fuzzy_crisp_number_data_criteria2=numpy.zeros((crisp_number_data_row_criteria2,crisp_number_data_row_criteria2,fuzzy_membership))
-fuzzy_crisp_number_data_criteria3=numpy.zeros((crisp_number_data_row_criteria3,crisp_number_data_row_criteria3,fuzzy_membership))
-fuzzy_crisp_number_data_criteria4=numpy.zeros((crisp_number_data_row_criteria4,crisp_number_data_row_criteria4,fuzzy_membership))
-fuzzy_crisp_number_data_criteria5=numpy.zeros((crisp_number_data_row_criteria5,crisp_number_data_row_criteria5,fuzzy_membership))
+fuzzy_crisp_number_data_alternative1=numpy.zeros((crisp_number_data_row_alternative1,crisp_number_data_row_alternative1,fuzzy_membership))
+fuzzy_crisp_number_data_alternative2=numpy.zeros((crisp_number_data_row_alternative2,crisp_number_data_row_alternative2,fuzzy_membership))
+fuzzy_crisp_number_data_alternative3=numpy.zeros((crisp_number_data_row_alternative3,crisp_number_data_row_alternative3,fuzzy_membership))
+fuzzy_crisp_number_data_alternative4=numpy.zeros((crisp_number_data_row_alternative4,crisp_number_data_row_alternative4,fuzzy_membership))
+fuzzy_crisp_number_data_alternative5=numpy.zeros((crisp_number_data_row_alternative5,crisp_number_data_row_alternative5,fuzzy_membership))
 #######
 #
 #
 #
 ####### geometric means per expert
-geometric_mean_criteria1=numpy.zeros((crisp_number_data_row_criteria1,fuzzy_membership))
-geometric_mean_criteria2=numpy.zeros((crisp_number_data_row_criteria2,fuzzy_membership))
-geometric_mean_criteria3=numpy.zeros((crisp_number_data_row_criteria3,fuzzy_membership))
-geometric_mean_criteria4=numpy.zeros((crisp_number_data_row_criteria4,fuzzy_membership))
-geometric_mean_criteria5=numpy.zeros((crisp_number_data_row_criteria5,fuzzy_membership))
+geometric_mean_alternative1=numpy.zeros((crisp_number_data_row_alternative1,fuzzy_membership))
+geometric_mean_alternative2=numpy.zeros((crisp_number_data_row_alternative2,fuzzy_membership))
+geometric_mean_alternative3=numpy.zeros((crisp_number_data_row_alternative3,fuzzy_membership))
+geometric_mean_alternative4=numpy.zeros((crisp_number_data_row_alternative4,fuzzy_membership))
+geometric_mean_alternative5=numpy.zeros((crisp_number_data_row_alternative5,fuzzy_membership))
 #######
 #
 #
@@ -321,8 +321,8 @@ full_geometric_mean=numpy.zeros((crisp_number_row,fuzzy_membership))
 #
 #
 #
-####### weighted criteria 
-weighted_criteria=numpy.zeros((crisp_number_row,fuzzy_membership))
+####### performance score 
+performance_score=numpy.zeros((crisp_number_row,fuzzy_membership))
 #######
 #
 #
@@ -398,16 +398,16 @@ l=0 #membership
 for k in range(0,crisp_number_row):
     for i in range(0,crisp_number_row):
         for l in range(0,fuzzy_membership):
-            if (crisp_number_data_criteria1[i,k] == 1):
-                fuzzy_crisp_number_data_criteria1[k][i,l]=equal[l]
-            if (crisp_number_data_criteria2[i,k] == 1):
-                fuzzy_crisp_number_data_criteria2[k][i,l]=equal[l]
-            if (crisp_number_data_criteria3[i,k] == 1):
-                fuzzy_crisp_number_data_criteria3[k][i,l]=equal[l]
-            if (crisp_number_data_criteria4[i,k] == 1):
-                fuzzy_crisp_number_data_criteria4[k][i,l]=equal[l]
-            if (crisp_number_data_criteria5[i,k] == 1):
-                fuzzy_crisp_number_data_criteria5[k][i,l]=equal[l]
+            if (crisp_number_data_alternative1[i,k] == 1):
+                fuzzy_crisp_number_data_alternative1[k][i,l]=equal[l]
+            if (crisp_number_data_alternative2[i,k] == 1):
+                fuzzy_crisp_number_data_alternative2[k][i,l]=equal[l]
+            if (crisp_number_data_alternative3[i,k] == 1):
+                fuzzy_crisp_number_data_alternative3[k][i,l]=equal[l]
+            if (crisp_number_data_alternative4[i,k] == 1):
+                fuzzy_crisp_number_data_alternative4[k][i,l]=equal[l]
+            if (crisp_number_data_alternative5[i,k] == 1):
+                fuzzy_crisp_number_data_alternative5[k][i,l]=equal[l]
 #
 ###
 #
@@ -419,30 +419,30 @@ for k in range(0,crisp_number_row):
 for k in range(0,crisp_number_row):
     for i in range(0,crisp_number_row):
         for l in range(0,fuzzy_membership):
-            if (crisp_number_data_criteria1[i,k] < 1):
-                fuzzy_crisp_number_data_criteria1[k][i,l]=InverseFuzzyMap(crisp_number_data_criteria1[i,k],l)
-            elif (crisp_number_data_criteria1[i,k] > 1):
-                fuzzy_crisp_number_data_criteria1[k][i,l]=FuzzyMap(crisp_number_data_criteria1[i,k],l)
+            if (crisp_number_data_alternative1[i,k] < 1):
+                fuzzy_crisp_number_data_alternative1[k][i,l]=InverseFuzzyMap(crisp_number_data_alternative1[i,k],l)
+            elif (crisp_number_data_alternative1[i,k] > 1):
+                fuzzy_crisp_number_data_alternative1[k][i,l]=FuzzyMap(crisp_number_data_alternative1[i,k],l)
 #
-            if (crisp_number_data_criteria2[i,k] < 1):
-                fuzzy_crisp_number_data_criteria2[k][i,l]=InverseFuzzyMap(crisp_number_data_criteria2[i,k],l)
-            elif (crisp_number_data_criteria2[i,k] > 1):
-                fuzzy_crisp_number_data_criteria2[k][i,l]=FuzzyMap(crisp_number_data_criteria2[i,k],l)
+            if (crisp_number_data_alternative2[i,k] < 1):
+                fuzzy_crisp_number_data_alternative2[k][i,l]=InverseFuzzyMap(crisp_number_data_alternative2[i,k],l)
+            elif (crisp_number_data_alternative2[i,k] > 1):
+                fuzzy_crisp_number_data_alternative2[k][i,l]=FuzzyMap(crisp_number_data_alternative2[i,k],l)
 #
-            if (crisp_number_data_criteria3[i,k] < 1):
-                fuzzy_crisp_number_data_criteria3[k][i,l]=InverseFuzzyMap(crisp_number_data_criteria3[i,k],l)
-            elif (crisp_number_data_criteria3[i,k] > 1):
-                fuzzy_crisp_number_data_criteria3[k][i,l]=FuzzyMap(crisp_number_data_criteria3[i,k],l)
+            if (crisp_number_data_alternative3[i,k] < 1):
+                fuzzy_crisp_number_data_alternative3[k][i,l]=InverseFuzzyMap(crisp_number_data_alternative3[i,k],l)
+            elif (crisp_number_data_alternative3[i,k] > 1):
+                fuzzy_crisp_number_data_alternative3[k][i,l]=FuzzyMap(crisp_number_data_alternative3[i,k],l)
 #
-            if (crisp_number_data_criteria4[i,k] < 1):
-                fuzzy_crisp_number_data_criteria4[k][i,l]=InverseFuzzyMap(crisp_number_data_criteria4[i,k],l)
-            elif (crisp_number_data_criteria4[i,k] > 1):
-                fuzzy_crisp_number_data_criteria4[k][i,l]=FuzzyMap(crisp_number_data_criteria4[i,k],l)
+            if (crisp_number_data_alternative4[i,k] < 1):
+                fuzzy_crisp_number_data_alternative4[k][i,l]=InverseFuzzyMap(crisp_number_data_alternative4[i,k],l)
+            elif (crisp_number_data_alternative4[i,k] > 1):
+                fuzzy_crisp_number_data_alternative4[k][i,l]=FuzzyMap(crisp_number_data_alternative4[i,k],l)
 #
-            if (crisp_number_data_criteria5[i,k] < 1):
-                fuzzy_crisp_number_data_criteria5[k][i,l]=InverseFuzzyMap(crisp_number_data_criteria5[i,k],l)
-            elif (crisp_number_data_criteria5[i,k] > 1):
-                fuzzy_crisp_number_data_criteria5[k][i,l]=FuzzyMap(crisp_number_data_criteria5[i,k],l)
+            if (crisp_number_data_alternative5[i,k] < 1):
+                fuzzy_crisp_number_data_alternative5[k][i,l]=InverseFuzzyMap(crisp_number_data_alternative5[i,k],l)
+            elif (crisp_number_data_alternative5[i,k] > 1):
+                fuzzy_crisp_number_data_alternative5[k][i,l]=FuzzyMap(crisp_number_data_alternative5[i,k],l)
 #
 ###
 #
@@ -485,11 +485,11 @@ geometric_mean_holder5=1
 for l in range(0,fuzzy_membership):
     for i in range(0,crisp_number_row):
         for k in range(0,crisp_number_row):
-            multiplier_holder1=multiplier_holder1*fuzzy_crisp_number_data_criteria1[k][i,l]
-            multiplier_holder2=multiplier_holder2*fuzzy_crisp_number_data_criteria2[k][i,l]
-            multiplier_holder3=multiplier_holder3*fuzzy_crisp_number_data_criteria3[k][i,l]
-            multiplier_holder4=multiplier_holder4*fuzzy_crisp_number_data_criteria4[k][i,l]
-            multiplier_holder5=multiplier_holder5*fuzzy_crisp_number_data_criteria5[k][i,l]
+            multiplier_holder1=multiplier_holder1*fuzzy_crisp_number_data_alternative1[k][i,l]
+            multiplier_holder2=multiplier_holder2*fuzzy_crisp_number_data_alternative2[k][i,l]
+            multiplier_holder3=multiplier_holder3*fuzzy_crisp_number_data_alternative3[k][i,l]
+            multiplier_holder4=multiplier_holder4*fuzzy_crisp_number_data_alternative4[k][i,l]
+            multiplier_holder5=multiplier_holder5*fuzzy_crisp_number_data_alternative5[k][i,l]
 #
         geometric_mean_holder1=multiplier_holder1**((1)/(crisp_number_row))
         geometric_mean_holder2=multiplier_holder2**((1)/(crisp_number_row))
@@ -497,11 +497,11 @@ for l in range(0,fuzzy_membership):
         geometric_mean_holder4=multiplier_holder4**((1)/(crisp_number_row))
         geometric_mean_holder5=multiplier_holder5**((1)/(crisp_number_row))
 #
-        geometric_mean_criteria1[i,l]=geometric_mean_holder1
-        geometric_mean_criteria2[i,l]=geometric_mean_holder2
-        geometric_mean_criteria3[i,l]=geometric_mean_holder3
-        geometric_mean_criteria4[i,l]=geometric_mean_holder4
-        geometric_mean_criteria5[i,l]=geometric_mean_holder5
+        geometric_mean_alternative1[i,l]=geometric_mean_holder1
+        geometric_mean_alternative2[i,l]=geometric_mean_holder2
+        geometric_mean_alternative3[i,l]=geometric_mean_holder3
+        geometric_mean_alternative4[i,l]=geometric_mean_holder4
+        geometric_mean_alternative5[i,l]=geometric_mean_holder5
 #
         multiplier_holder1=1
         geometric_mean_holder1=1
@@ -549,7 +549,7 @@ geometric_mean_holder=1
 # rows = experts*criteria (or alternatives)
 # columns = membership functions
 #
-concatenated_geometric_mean=numpy.concatenate((geometric_mean_criteria1,geometric_mean_criteria2,geometric_mean_criteria3,geometric_mean_criteria4,geometric_mean_criteria5),axis=0)
+concatenated_geometric_mean=numpy.concatenate((geometric_mean_alternative1,geometric_mean_alternative2,geometric_mean_alternative3,geometric_mean_alternative4,geometric_mean_alternative5),axis=0)
 #
 ### get rows
 concatenated_geometric_mean_row=concatenated_geometric_mean.shape[0]
@@ -583,7 +583,7 @@ for l in range(0,fuzzy_membership):
 #
 ##################################################################################
 #
-# WEIGHTED CRITERIA 
+# PERFORMANCE SCORE 
 #
 #
 #
@@ -606,7 +606,7 @@ column_sum=full_geometric_mean.sum(axis=0)
 ### compute weights
 for l in range(0,fuzzy_membership):
     for i in range(crisp_number_row):
-        weighted_criteria[i,l]=(full_geometric_mean[i,l])/(column_sum[(fuzzy_membership-1)-l])
+        performance_score[i,l]=(full_geometric_mean[i,l])/(column_sum[(fuzzy_membership-1)-l])
 #
 ###
 #
@@ -629,7 +629,7 @@ i=0
 ### remap uses trapezoid rule
 #
 for i in range(0,crisp_number_row):
-    remapped_crisp_numbers[i]=(weighted_criteria[i,0]+2*weighted_criteria[i,1]+2*weighted_criteria[i,2]+weighted_criteria[i,3])/(6)
+    remapped_crisp_numbers[i]=(performance_score[i,0]+2*performance_score[i,1]+2*performance_score[i,2]+performance_score[i,3])/(6)
 #
 remapped_sum=numpy.sum(remapped_crisp_numbers)
 ###
@@ -663,14 +663,14 @@ membership_function_ordinate=numpy.vstack(membership_function_ordinate)
 #
 #
 #
-### transpose weighted criteria 
-weighted_criteria_transpose=numpy.transpose(weighted_criteria)
+### transpose weighted alternative 
+performance_score_transpose=numpy.transpose(performance_score)
 ###
 #
 #
 #
 ### make graphing file
-weighted_criteria_graph=numpy.concatenate((membership_function_ordinate,weighted_criteria_transpose),axis=1)
+performance_score_graph=numpy.concatenate((membership_function_ordinate,performance_score_transpose),axis=1)
 ###
 #
 #
@@ -681,9 +681,9 @@ weighted_criteria_graph=numpy.concatenate((membership_function_ordinate,weighted
 #
 #
 #
-numpy.savetxt('weighted-criteria.out',weighted_criteria,fmt='%.4f')
-numpy.savetxt('weighted-criteria-graph.out',weighted_criteria_graph,fmt='%.4f')
-numpy.savetxt('nmz-remapped-crisp-numbers-criteria.out',nmz_remapped_crisp_numbers,fmt='%.4f')
+numpy.savetxt('performance-score-criteria3.out',performance_score,fmt='%.4f')
+numpy.savetxt('performance-score-criteria3-graph.out',performance_score_graph,fmt='%.4f')
+numpy.savetxt('nmz-remapped-crisp-numbers-alternative-criteria3.out',nmz_remapped_crisp_numbers,fmt='%.4f')
 #
 #
 #
@@ -693,29 +693,29 @@ numpy.savetxt('nmz-remapped-crisp-numbers-criteria.out',nmz_remapped_crisp_numbe
 #
 #
 #
-#print('pairwise comparison example matrix 1','\n',crisp_number_data_criteria1,'\n')
-#print('pairwise comparison example matrix 2','\n',crisp_number_data_criteria2,'\n')
-#print('pairwise comparison example matrix 3','\n',crisp_number_data_criteria3,'\n')
-#print('pairwise comparison example matrix 4','\n',crisp_number_data_criteria4,'\n')
-#print('pairwise comparison example matrix 5','\n',crisp_number_data_criteria5,'\n')
-#print('rows and columns',crisp_number_data_row_criteria1,crisp_number_data_column_criteria1,crisp_number_data_row_criteria2,crisp_number_data_column_criteria2,'\n')
+#print('pairwise comparison example matrix 1','\n',crisp_number_data_alternative1,'\n')
+#print('pairwise comparison example matrix 2','\n',crisp_number_data_alternative2,'\n')
+#print('pairwise comparison example matrix 3','\n',crisp_number_data_alternative3,'\n')
+#print('pairwise comparison example matrix 4','\n',crisp_number_data_alternative4,'\n')
+#print('pairwise comparison example matrix 5','\n',crisp_number_data_alternative5,'\n')
+#print('rows and columns',crisp_number_data_row_alternative1,crisp_number_data_column_alternative1,crisp_number_data_row_alternative2,crisp_number_data_column_alternative2,'\n')
 #print('length of membership function',fuzzy_membership,'\n')
 #print('weak',weak,'\n')
 #print('reverse weak',reverse_weak,'\n')
 #print('mid strong',mid_strong,'\n')
 #print('inverse mid strong',inverse_mid_strong,'\n')
-#print('fuzzy map 1','\n',fuzzy_crisp_number_data_criteria1,'\n')
-#print('fuzzy map 2','\n',fuzzy_crisp_number_data_criteria2,'\n')
-#print('fuzzy map 3','\n',fuzzy_crisp_number_data_criteria3,'\n')
-#print('fuzzy map 4','\n',fuzzy_crisp_number_data_criteria4,'\n')
-#print('fuzzy map 5','\n',fuzzy_crisp_number_data_criteria5,'\n')
-#print('geometric mean 1','\n',geometric_mean_criteria1,'\n')
-#print('geometric mean 2','\n',geometric_mean_criteria2,'\n')
-#print('geometric mean 3','\n',geometric_mean_criteria3,'\n')
-#print('geometric mean 4','\n',geometric_mean_criteria4,'\n')
-#print('geometric mean 5','\n',geometric_mean_criteria5,'\n')
+#print('fuzzy map 1','\n',fuzzy_crisp_number_data_alternative1,'\n')
+#print('fuzzy map 2','\n',fuzzy_crisp_number_data_alternative2,'\n')
+#print('fuzzy map 3','\n',fuzzy_crisp_number_data_alternative3,'\n')
+#print('fuzzy map 4','\n',fuzzy_crisp_number_data_alternative4,'\n')
+#print('fuzzy map 5','\n',fuzzy_crisp_number_data_alternative5,'\n')
+#print('geometric mean 1','\n',geometric_mean_alternative1,'\n')
+#print('geometric mean 2','\n',geometric_mean_alternative2,'\n')
+#print('geometric mean 3','\n',geometric_mean_alternative3,'\n')
+#print('geometric mean 4','\n',geometric_mean_alternative4,'\n')
+#print('geometric mean 5','\n',geometric_mean_alternative5,'\n')
 #print('full geometric mean','\n',full_geometric_mean,'\n')
-#print('weighted criteria','\n',weighted_criteria,'\n')
+#print('weighted alternative','\n',weighted_alternative,'\n')
 #print('remapped crisp numbers',remapped_crisp_numbers,'\n')
 #
 #
